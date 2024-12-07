@@ -5,10 +5,10 @@ const User = require("../models/User");
 
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  // domain: "yourdomain.com", // Set to your domain
-  sameSite: "none", // or "none" for cross-site cookies
+  secure: process.env.NODE_ENV === "production", 
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", 
 };
+
 
 
 
