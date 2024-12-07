@@ -5,11 +5,9 @@ const User = require("../models/User");
 
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", 
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", 
+  secure: true,  // Set true for production if you're using HTTPS
+  sameSite: 'None',  // Required for cross-origin requests (especially with CORS)
 };
-
-
 
 
 const login = async (req, res) => {
@@ -23,11 +21,7 @@ const login = async (req, res) => {
         .json({ message: "No account found. Please create one." });
     }
 
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
-
+    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
     if (!isPasswordValid) {
       return res
         .status(401)
@@ -40,6 +34,7 @@ const login = async (req, res) => {
       { expiresIn: expireKey }
     );
 
+    // Set the authToken cookie with the JWT token
     res.cookie("authToken", token, cookieOptions);
 
     res.status(200).json({
@@ -53,9 +48,7 @@ const login = async (req, res) => {
     });
   } catch (error) {
     console.error("Error during login:", error.message);
-    res
-      .status(500)
-      .json({ message: "Internal server error. Please try again later." });
+    res.status(500).json({ message: "Internal server error. Please try again later." });
   }
 };
 
@@ -86,6 +79,7 @@ const register = async (req, res) => {
       { expiresIn: expireKey }
     );
 
+    // Set the authToken cookie with the JWT token
     res.cookie("authToken", token, cookieOptions);
 
     res.status(201).json({
@@ -98,15 +92,13 @@ const register = async (req, res) => {
     });
   } catch (error) {
     console.error("Error during registration:", error.message);
-    res
-      .status(500)
-      .json({ message: "Internal server error. Please try again later." });
+    res.status(500).json({ message: "Internal server error. Please try again later." });
   }
 };
 
 const logout = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    res.cookie("authToken", "", { maxAge: 0 }); // Clear the cookie
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
@@ -115,7 +107,7 @@ const logout = (req, res) => {
 
 const checkAuth = (req, res) => {
   try {
-    res.status(200).json(req.user);
+    res.status(200).json(req.user); // Return the authenticated user details
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }

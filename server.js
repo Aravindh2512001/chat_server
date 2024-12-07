@@ -19,20 +19,14 @@ const server = http.createServer(app);
 app.use(cors({
   origin: [
     '*',
-    // Development environments
-    'http://localhost:5173',  
-    'http://localhost:5000', 
-    
-    // Production environments
-    'https://chat-client-ashy-eta.vercel.app',
-    // 'https://chat-client-2301-git-main-aravindhs-projects-0d80c1d4.vercel.app',
-    // 'https://chat-client-2301-73yv3mwom-aravindhs-projects-0d80c1d4.vercel.app',
+    'http://localhost:5173',  // Frontend development URL
+    'http://localhost:5000',  // Backend development URL
+    'https://chat-client-ashy-eta.vercel.app',  // Production URL
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, 
 }));
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -52,15 +46,6 @@ setupSocket(server);
 app.get('/', (req, res) => {
   res.send('Server is running successfully!');
 });
-
-if (process.env.NODE_ENV === 'development') {
-  // Development-specific configurations
-  console.log('Running in development mode');
-} else if (process.env.NODE_ENV === 'production') {
-  // Production-specific configurations
-  console.log('Running in production mode');
-}
-
 
 // Start the server
 server.listen(port, () => {
