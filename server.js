@@ -37,6 +37,11 @@ app.use(`${api}/message`, messageRoutes);
 // Initialize socket
 setupSocket(server);
 
+app.get('/', (req, res) => {
+  res.send('Server is running successfully!');
+});
+
+
 // Start the server
 server.listen(port, () => {
   console.log(`App running on http://localhost:${port}`);
