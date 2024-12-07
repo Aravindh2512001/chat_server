@@ -46,6 +46,15 @@ app.get('/', (req, res) => {
   res.send('Server is running successfully!');
 });
 
+if (process.env.NODE_ENV === 'development') {
+  // Development-specific configurations
+  console.log('Running in development mode');
+} else if (process.env.NODE_ENV === 'production') {
+  // Production-specific configurations
+  console.log('Running in production mode');
+}
+
+
 // Start the server
 server.listen(port, () => {
   console.log(`App running on http://localhost:${port}`);
