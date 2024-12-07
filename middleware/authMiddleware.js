@@ -4,10 +4,11 @@ const User = require("../models/User");
 
 const authMiddleware = async (req, res, next) => {
   const token =
-    req.cookies.authToken || req.headers["authorization"]?.split(" ")[1];
+  req.cookies.authToken || req.headers["authorization"]?.split(" ")[1];
   if (!token) {
     return res.status(401).json({ message: "User unauthorized" });
   }
+  console.log("token",token)
   try {
     const decodedToken = JWT.verify(token, secretKey);
     const user = await User.findById(decodedToken.id).select('-password');

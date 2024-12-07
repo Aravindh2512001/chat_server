@@ -13,7 +13,7 @@ function getOnlineUsers() {
 function setupSocket(server) {
   const io = socketIo(server, {
     cors: {
-      origin: '*:*',  
+      origin: '*:*',    
       methods: ['GET', 'POST'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true, 
