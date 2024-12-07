@@ -18,6 +18,7 @@ const server = http.createServer(app);
 // Middleware
 app.use(cors({
   origin: [
+    '*',
     // Development environments
     'http://localhost:5173',  
     'http://localhost:5000', 
