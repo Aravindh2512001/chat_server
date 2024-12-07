@@ -17,11 +17,16 @@ const server = http.createServer(app);
 
 // Middleware
 app.use(cors({
-  origin: '*',  
+  origin: [
+    'https://chat-client-2301.vercel.app', 
+    'https://chat-client-2301-git-main-aravindhs-projects-0d80c1d4.vercel.app',  
+    'https://chat-client-2301-73yv3mwom-aravindhs-projects-0d80c1d4.vercel.app' 
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+  credentials: true, 
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('tiny'));

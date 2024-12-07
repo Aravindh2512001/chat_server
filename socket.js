@@ -13,7 +13,7 @@ function getOnlineUsers() {
 function setupSocket(server) {
   const io = socketIo(server, {
     cors: {
-      origin: 'https://chat-client-2301.vercel.app',  
+      origin: '*:*',  
       methods: ['GET', 'POST'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true, 
