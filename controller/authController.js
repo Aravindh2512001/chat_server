@@ -5,8 +5,11 @@ const User = require("../models/User");
 
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", 
+  secure: process.env.NODE_ENV === "production",
+  // domain: "yourdomain.com", // Set to your domain
+  sameSite: "none", // or "none" for cross-site cookies
 };
+
 
 
 const login = async (req, res) => {
