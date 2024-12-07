@@ -1,41 +1,32 @@
-// server.js
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const connectDb = require('./db/db');
 const { port, api } = require('./config/env');
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authroutes');
 const messageRoutes = require('./routes/messageRoutes');
+const userRoutes = require('./routes/userRoutes');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
+const { setupSocket } = require('./socket');
 
-// Create an express app
+// Initialize express app
 const app = express();
-
-// Create the HTTP server using the express app
 const server = http.createServer(app);
 
-// Set up socket.io
-const {setupSocket} = require('./socket') // Import socket logic
-
-// Initialize socket.io with the server
-setupSocket(server);
-
-// Middleware 
+// Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization'], 
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  SameSite: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
-// Connect to the database
+// Database connection
 connectDb();
 
 // Routes
@@ -43,7 +34,10 @@ app.use(`${api}/auth`, authRoutes);
 app.use(`${api}/user`, userRoutes);
 app.use(`${api}/message`, messageRoutes);
 
+// Initialize socket
+setupSocket(server);
+
 // Start the server
-server.listen(port || 5000, () => {
-  console.log(`App running on http://localhost:${port || 5000}`);
+server.listen(port, () => {
+  console.log(`App running on http://localhost:${port}`);
 });

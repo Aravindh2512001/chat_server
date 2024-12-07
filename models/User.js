@@ -15,10 +15,10 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true, 
+    required: true,
   },
   avatar: {
-    type: String, 
+    type: String,
     default: null,
   },
 }, { timestamps: true });
