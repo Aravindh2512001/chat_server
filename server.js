@@ -23,9 +23,9 @@ app.use(cors({
     'http://localhost:5000', 
     
     // Production environments
-    'https://chat-client-2301.vercel.app',
-    'https://chat-client-2301-git-main-aravindhs-projects-0d80c1d4.vercel.app',
-    'https://chat-client-2301-73yv3mwom-aravindhs-projects-0d80c1d4.vercel.app',
+    'https://chat-client-ashy-eta.vercel.app',
+    // 'https://chat-client-2301-git-main-aravindhs-projects-0d80c1d4.vercel.app',
+    // 'https://chat-client-2301-73yv3mwom-aravindhs-projects-0d80c1d4.vercel.app',
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
