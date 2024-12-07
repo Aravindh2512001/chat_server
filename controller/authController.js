@@ -5,8 +5,9 @@ const User = require("../models/User");
 
 const cookieOptions = {
   httpOnly: true,
-  // secure: process.env.NODE_ENV === "production",
+  secure: process.env.NODE_ENV === "production", 
 };
+
 
 const login = async (req, res) => {
   const { email, password } = req.body;
