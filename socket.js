@@ -13,31 +13,31 @@ function getOnlineUsers() {
 function setupSocket(server) {
   const io = socketIo(server, {
     cors: {
-      origin: '*:*',    
+      origin: '*:*',
       methods: ['GET', 'POST'],
       allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true, 
+      credentials: true,
     },
   });
-  
+
   io.on("connection", (socket) => {
     const userId = socket.handshake.query.userId;
 
     if (userId) {
-      userSocketMap[userId] = socket.id;
-      io.emit("online_users", getOnlineUsers());
+      userSocketMap[userId] = socket.id; // Add user to socket map
+      io.emit("online_users", getOnlineUsers()); // Broadcast online users list
     }
 
     socket.on("send_message", (msg) => {
       const receiverSocketId = getReceiverSocketId(msg.receiverId);
       if (receiverSocketId) {
-        io.to(receiverSocketId).emit("new_message", msg);
+        io.to(receiverSocketId).emit("new_message", msg); // Send message to the receiver
       }
     });
 
     socket.on("disconnect", () => {
-      delete userSocketMap[userId];
-      io.emit("online_users", getOnlineUsers());
+      delete userSocketMap[userId]; // Remove user from map on disconnect
+      io.emit("online_users", getOnlineUsers()); // Broadcast updated online users list
     });
   });
 }

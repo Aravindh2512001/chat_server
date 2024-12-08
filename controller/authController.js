@@ -98,7 +98,7 @@ const register = async (req, res) => {
 
 const logout = (req, res) => {
   try {
-    res.cookie("authToken", "", { maxAge: 0 }); // Clear the cookie
+    res.cookie("authToken", "", { maxAge: 0 }); 
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
@@ -107,7 +107,7 @@ const logout = (req, res) => {
 
 const checkAuth = (req, res) => {
   try {
-    res.status(200).json(req.user); // Return the authenticated user details
+    res.status(200).json(req.user); 
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }

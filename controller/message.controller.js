@@ -6,7 +6,6 @@ const getConversation = async (req, res) => {
   try {
     const { id: friendId } = req.params;
     const userId = req.user._id;
-    console.log("friendId",friendId)
     if (!userId || !friendId) {
       return res.status(400).json({ error: "Invalid user or friend ID provided." });
     }
@@ -36,7 +35,7 @@ const sendMessage = async (req, res) => {
 
     const receiverSocketId = getReceiverSocketId(receiverId);
     if (receiverSocketId) {
-      io.to(receiverSocketId).emit("new_message", newMessage);
+      io.to(receiverSocketId).emit("new_message", newMessage); // Emit new message to receiver
     }
 
     res.status(200).json({ success: true, newMessage });

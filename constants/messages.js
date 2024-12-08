@@ -1,0 +1,30 @@
+const MESSAGES = {
+    SUCCESS: "Operation successful.",
+    INVALID_CREDENTIALS: "Invalid email or password.",
+    USER_REGISTERED: "User registered successfully.",
+    USER_EXISTS: "User already exists.",
+    USER_NOT_FOUND: "User not found.",
+    AUTH_REQUIRED: "Authentication required.",
+    SERVER_ERROR: "Internal server error. Please try again later.",
+    CONFLICT: "Data conflict occurred.",
+    NOT_FOUND: "The requested resource could not be found.",
+    UNAUTHORIZED: "You are not authorized to access this resource.",
+    SERVICE_UNAVAILABLE: "The server is temporarily unavailable. Please try again later.",
+    VALIDATION_ERROR: "Invalid data provided.",
+    LOGIN_SUCCESS: "User logged in successfully.",
+    PASSWORD_RESET_LINK_SENT: "Password reset link sent.",
+    TOKEN_EXPIRED: "Session expired, please log in again.",
+    FORBIDDEN: "You do not have permission to perform this action.",
+    CREATED_RESOURCE: "Resource successfully created.",
+    DELETED_RESOURCE: "Resource deleted successfully.",
+    UPDATED_RESOURCE: "Resource updated successfully.",
+    RESOURCE_CONFLICT: "Conflict with existing resource, please try again.",
+    INVALID_TOKEN: "Invalid or expired token.",
+    INVALID_METHOD: "Invalid method used in the request.",
+    RATE_LIMIT_EXCEEDED: "Too many requests, please try again later.",
+    NOT_ACCEPTABLE: "The server cannot generate an acceptable response for your request.",
+    PAYLOAD_TOO_LARGE: "Request body is too large, please reduce the size and try again.",
+    INVALID_MEDIA_TYPE: "Unsupported media type, please provide a valid format."
+};
+
+module.exports = MESSAGES;
