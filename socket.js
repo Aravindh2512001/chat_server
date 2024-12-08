@@ -1,6 +1,7 @@
 const socketIo = require("socket.io");
 
 const userSocketMap = {};
+let io;
 
 function getReceiverSocketId(receiverId) {
   return userSocketMap[receiverId];
@@ -10,8 +11,10 @@ function getOnlineUsers() {
   return Object.keys(userSocketMap);
 }
 
+
+
 function setupSocket(server) {
-  const io = socketIo(server, {
+   io = socketIo(server, {
     cors: {
       origin: '*:*',
       methods: ['GET', 'POST'],
@@ -42,4 +45,4 @@ function setupSocket(server) {
   });
 }
 
-module.exports = { setupSocket, getReceiverSocketId };
+module.exports = { setupSocket, getReceiverSocketId,io };
